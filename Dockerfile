@@ -13,7 +13,7 @@ ENV ANDROID_SDK_TOOLS_VERSION="3859397"
 ENV ANDROID_NDK_VERSION="15c"
 
 # nodejs version
-ENV NODE_VERSION="8.x"
+# ENV NODE_VERSION="8.x"
 
 # Set locale
 ENV LANG="en_US.UTF-8" \
@@ -60,30 +60,30 @@ RUN apt-get update -qq > /dev/null && \
         openssh-client \
         pkg-config \
         python-software-properties \
-        ruby-full \
         software-properties-common \
         unzip \
         wget \
         zip \
-        zlib1g-dev > /dev/null && \
-    echo "installing nodejs, npm, cordova, ionic, react-native" && \
-    curl -sL -k https://deb.nodesource.com/setup_${NODE_VERSION} \
-        | bash - > /dev/null && \
-    apt-get install -qq nodejs > /dev/null && \
-    apt-get clean > /dev/null && \
-    rm -rf /var/lib/apt/lists/ && \
-    npm install --quiet -g npm > /dev/null && \
-    npm install --quiet -g \
-        bower cordova eslint gulp \
-        ionic jshint karma-cli mocha \
-        node-gyp npm-check-updates \
-        react-native-cli > /dev/null && \
-    npm cache clean --force > /dev/null && \
-    rm -rf /tmp/* /var/tmp/* && \
-    echo "installing fastlane" && \
-    gem install fastlane --quiet --no-document > /dev/null
+        zlib1g-dev > /dev/null
+#    echo "installing nodejs, npm, cordova, ionic, react-native" && \
+#    curl -sL -k https://deb.nodesource.com/setup_${NODE_VERSION} \
+#        | bash - > /dev/null && \
+#    apt-get install -qq nodejs > /dev/null && \
+#    apt-get clean > /dev/null && \
+#    rm -rf /var/lib/apt/lists/ && \
+#    npm install --quiet -g npm > /dev/null && \
+#    npm install --quiet -g \
+#        bower cordova eslint gulp \
+#        ionic jshint karma-cli mocha \
+#        node-gyp npm-check-updates \
+#        react-native-cli > /dev/null && \
+#    npm cache clean --force > /dev/null && \
+#    rm -rf /tmp/* /var/tmp/* && \
+#    echo "installing fastlane" && \
+#    gem install fastlane --quiet --no-document > /dev/null
 
 # Install Android SDK
+RUN mkdir -p $ANDROID_HOME/.android/ && touch $ANDROID_HOME/.android/repositories.cfg
 RUN echo "installing sdk tools" && \
     wget --quiet --output-document=sdk-tools.zip \
         "https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip" && \
