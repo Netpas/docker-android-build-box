@@ -156,12 +156,13 @@ RUN echo "installing sdk tools" && \
         "add-ons;addon-google_apis-google-19" \
         "add-ons;addon-google_apis-google-18" \
         "add-ons;addon-google_apis-google-17" \
-        "add-ons;addon-google_apis-google-16" && \
-    echo "installing emulator " && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager "emulator" && \
-    echo "installing system image with android 25 and google apis" && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "system-images;android-25;google_apis;x86_64"
+        "add-ons;addon-google_apis-google-16"
+#        && \
+#    echo "installing emulator " && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager "emulator" && \
+#    echo "installing system image with android 25 and google apis" && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+#        "system-images;android-25;google_apis;x86_64"
 
 # Copy sdk license agreement files.
 RUN mkdir -p $ANDROID_HOME/licenses
