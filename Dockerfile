@@ -7,10 +7,10 @@ ENV ANDROID_HOME="/opt/android-sdk" \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 # Get the latest version from https://developer.android.com/studio/index.html
-ENV ANDROID_SDK_TOOLS_VERSION="3859397"
+ENV ANDROID_SDK_TOOLS_VERSION="4333796"
 
 # Get the latest version from https://developer.android.com/ndk/downloads/index.html
-ENV ANDROID_NDK_VERSION="15c"
+ENV ANDROID_NDK_VERSION="18b"
 
 # nodejs version
 # ENV NODE_VERSION="8.x"
@@ -163,6 +163,9 @@ RUN echo "installing sdk tools" && \
 #    echo "installing system image with android 25 and google apis" && \
 #    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
 #        "system-images;android-25;google_apis;x86_64"
+RUN echo "installing platforms android-28" && \
+    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+        "platforms;android-28"
 
 # Copy sdk license agreement files.
 RUN mkdir -p $ANDROID_HOME/licenses
