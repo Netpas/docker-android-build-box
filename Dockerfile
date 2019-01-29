@@ -122,7 +122,7 @@ RUN echo "installing sdk tools" && \
         "platform-tools" && \
     echo "installing build tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "build-tools;28.0.2" \
+        "build-tools;28.0.3" \
         "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
         "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
         "build-tools;25.0.3" "build-tools;25.0.2" \
