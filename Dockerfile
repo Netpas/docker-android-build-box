@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
 MAINTAINER Ming Chen
 
@@ -10,7 +10,7 @@ ENV ANDROID_HOME="/opt/android-sdk" \
 ENV ANDROID_SDK_TOOLS_VERSION="4333796"
 
 # Get the latest version from https://developer.android.com/ndk/downloads/index.html
-ENV ANDROID_NDK_VERSION="18b"
+ENV ANDROID_NDK_VERSION="19"
 
 # nodejs version
 # ENV NODE_VERSION="8.x"
@@ -42,6 +42,7 @@ RUN apt-get update -qq > /dev/null && \
         build-essential \
         autoconf \
         curl \
+        dnsutils \
         git \
         lib32stdc++6 \
         lib32z1 \
@@ -59,7 +60,6 @@ RUN apt-get update -qq > /dev/null && \
         openjdk-8-jdk \
         openssh-client \
         pkg-config \
-        python-software-properties \
         software-properties-common \
         unzip \
         wget \
@@ -105,6 +105,7 @@ RUN echo "installing sdk tools" && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager --licenses > /dev/null && \
     echo "installing platforms" && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+        "platforms;android-28" \
         "platforms;android-27" \
         "platforms;android-26" \
         "platforms;android-25" \
@@ -122,7 +123,7 @@ RUN echo "installing sdk tools" && \
         "platform-tools" && \
     echo "installing build tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "build-tools;28.0.3" \
+        "build-tools;28.0.3" "build-tools;28.0.2" \
         "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
         "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
         "build-tools;25.0.3" "build-tools;25.0.2" \
@@ -163,10 +164,8 @@ RUN echo "installing sdk tools" && \
 #    echo "installing system image with android 25 and google apis" && \
 #    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
 #        "system-images;android-25;google_apis;x86_64"
-RUN echo "installing platforms android-28" && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "platforms;android-28"
 
 # Copy sdk license agreement files.
 RUN mkdir -p $ANDROID_HOME/licenses
 COPY sdk/licenses/* $ANDROID_HOME/licenses/
+
